@@ -65,18 +65,17 @@ h1 {
   margin: 0;
   font-family: "Press Start 2P", monospace;
   font-weight: 400;
-  width: max-content;
+  width: 10ch;
   max-width: 100%;
   overflow: hidden;
   font-size: clamp(2.25rem, 8.5vw, 6.25rem);
   line-height: 1.25;
   color: #ffffff;
   white-space: nowrap;
-  border-right: 0.08em solid #ffffff;
-  clip-path: inset(0 100% 0 0);
+  border-right: 4px solid #ffffff;
   animation:
-    typing 1.8s steps(10, end) forwards,
-    cursor-blink 0.8s step-end infinite;
+    typing 2s steps(10) forwards,
+    blink 1s step-end infinite;
 }
 
 h3 {
@@ -645,15 +644,18 @@ h3 {
 
 @keyframes typing {
   from {
-    clip-path: inset(0 100% 0 0);
+    width: 0;
   }
-
   to {
-    clip-path: inset(0 0 0 0);
+    width: 10ch;
   }
 }
 
-@keyframes cursor-blink {
+@keyframes blink {
+  0%,
+  100% {
+    border-color: #ffffff;
+  }
   50% {
     border-color: transparent;
   }
