@@ -179,6 +179,132 @@ h3 {
   color: #ffffff;
 }
 
+.systems-section {
+  position: relative;
+  z-index: 4;
+  min-height: 100vh;
+  display: grid;
+  align-items: center;
+  padding: 108px 32px;
+  background: #000000;
+  box-shadow: 0 -36px 70px rgba(0, 0, 0, 0.55);
+}
+
+.systems-content {
+  width: min(1240px, 100%);
+  margin: 0 auto;
+}
+
+.systems-content h2 {
+  margin: 0 0 48px;
+  font-family: "Press Start 2P", monospace;
+  font-size: clamp(1.7rem, 4vw, 3.4rem);
+  font-weight: 400;
+  line-height: 1.3;
+  color: #ffffff;
+}
+
+.systems-carousel-container {
+  position: relative;
+  width: 100%;
+  max-width: 900px;
+  margin: 0 auto;
+  overflow: hidden;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  background: rgba(0, 0, 0, 0.4);
+}
+
+.systems-carousel-track {
+  display: flex;
+  transition: transform 0.6s cubic-bezier(0.23, 1, 0.32, 1);
+}
+
+.system-video-card {
+  flex: 0 0 100%;
+  width: 100%;
+}
+
+.system-video-wrapper {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  background: #000;
+}
+
+.system-video-wrapper video {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.system-video-overlay {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  padding: 40px 32px 32px;
+  background: linear-gradient(transparent, rgba(0, 0, 0, 0.95));
+  pointer-events: none;
+}
+
+.system-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 12px;
+  gap: 16px;
+}
+
+.system-video-overlay h3 {
+  margin: 0;
+  font-family: "Press Start 2P", monospace;
+  font-size: 1rem;
+  color: #ffffff;
+  line-height: 1.4;
+}
+
+.system-tags {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.system-tag {
+  font-family: "Press Start 2P", monospace;
+  font-size: 0.55rem;
+  padding: 4px 8px;
+  background: rgba(158, 239, 255, 0.15);
+  color: #9eefff;
+  border: 1px solid rgba(158, 239, 255, 0.3);
+}
+
+.system-video-overlay p {
+  margin: 0;
+  font-size: 0.85rem;
+  line-height: 1.6;
+  color: rgba(255, 255, 255, 0.85);
+  max-width: 80%;
+}
+
+.systems-indicators {
+  display: flex;
+  justify-content: center;
+  gap: 12px;
+  margin-top: 24px;
+}
+
+.system-indicator {
+  width: 40px;
+  height: 4px;
+  background: rgba(255, 255, 255, 0.2);
+  cursor: pointer;
+  transition: background 0.3s ease;
+}
+
+.system-indicator.is-active {
+  background: #9eefff;
+}
+
 .carousel-scene {
   --carousel-card-width: 260px;
   --carousel-radius: 200px;

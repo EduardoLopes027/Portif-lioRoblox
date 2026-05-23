@@ -33,6 +33,37 @@ const gameProjects = [
   },
 ];
 
+const systemProjects = [
+  {
+    title: 'Combat System',
+    tags: ['LUA', 'RAYCAST', 'VFX'],
+    video: '/games/sistema1.mp4',
+    description:
+      'High-performance hit detection, combo chains, and visual feedback integration.',
+  },
+  {
+    title: 'Inventory Framework',
+    tags: ['DATASTORE', 'UI', 'BACKEND'],
+    video: '/games/sistema2.mp4',
+    description:
+      'Robust cross-server item management, trading logic, and responsive interface.',
+  },
+  {
+    title: 'Abilities Engine',
+    tags: ['MODULES', 'COOLDOWNS', 'MATH'],
+    video: '/games/sistema3.mp4',
+    description:
+      'Modular system for easy skill creation, including cooldown management and area-of-effect logic.',
+  },
+  {
+    title: 'Leveling Logic',
+    tags: ['EXP', 'REWARDS', 'SCALING'],
+    video: '/games/sistema4.mp4',
+    description:
+      'Dynamic progression formulas with balanced experience curves and automatic reward distribution.',
+  },
+];
+
 function useMomentumScroll() {
   const currentScrollRef = useRef(0);
   const targetScrollRef = useRef(0);
@@ -210,8 +241,11 @@ function useCountUp(targetValue, shouldStart, duration = 1400) {
 function App() {
   const aboutRef = useRef(null);
   const gamesRef = useRef(null);
+  const systemsRef = useRef(null);
   const [isAboutVisible, setIsAboutVisible] = useState(false);
+  const [isSystemsVisible, setIsSystemsVisible] = useState(false);
   const [carouselIndex, setCarouselIndex] = useState(0);
+  const [systemCarouselIndex, setSystemCarouselIndex] = useState(0);
   const [isHoveringActiveCard, setIsHoveringActiveCard] = useState(false);
   const smoothScrollTo = useMomentumScroll();
   const yearsCount = useCountUp(3, isAboutVisible, 3200);
@@ -220,6 +254,9 @@ function App() {
   const activeGameIndex =
     ((carouselIndex % gameProjects.length) + gameProjects.length) %
     gameProjects.length;
+  const activeSystemIndex =
+    ((systemCarouselIndex % systemProjects.length) + systemProjects.length) %
+    systemProjects.length;
 
   const scrollToAbout = () => {
     if (aboutRef.current) {
@@ -230,6 +267,12 @@ function App() {
   const scrollToGames = () => {
     if (gamesRef.current) {
       smoothScrollTo(gamesRef.current.offsetTop);
+    }
+  };
+
+  const scrollToSystems = () => {
+    if (systemsRef.current) {
+      smoothScrollTo(systemsRef.current.offsetTop);
     }
   };
 
@@ -287,21 +330,30 @@ function App() {
 
   useEffect(() => {
     const aboutElement = aboutRef.current;
+    const systemsElement = systemsRef.current;
 
     if (!aboutElement) {
       return undefined;
     }
 
     const observer = new IntersectionObserver(
-      ([entry]) => {
-        if (entry.isIntersecting) {
-          setIsAboutVisible(true);
-        }
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.target === aboutElement && entry.isIntersecting) {
+            setIsAboutVisible(true);
+          }
+          if (entry.target === systemsElement && entry.isIntersecting) {
+            setIsSystemsVisible(true);
+          }
+        });
       },
       { threshold: 0.35 },
     );
 
     observer.observe(aboutElement);
+    if (systemsElement) {
+      observer.observe(systemsElement);
+    }
 
     return () => {
       observer.disconnect();
@@ -460,6 +512,80 @@ function App() {
             >
               &gt;
             </button>
+          </div>
+        </div>
+      </section>
+
+      <section
+        className={`systems-section${isSystemsVisible ? ' is-visible' : ''}`}
+        id="systems"
+        ref={systemsRef}
+      >
+        <div className="systems-content">
+          <p className="section-kicker">technical expertise</p>
+          <h2>Systems by me:</h2>
+          
+          <div className="systems-carousel-container">
+            <div 
+              className="systems-carousel-track"
+              style={{ transform: `translateX(-${activeSystemIndex * 100}%)` }}
+            >
+              {systemProjects.map((system, index) => (
+                <article className="system-video-card" key={system.title}>
+                  <div className="system-video-wrapper">
+                    <video 
+                      src={system.video} 
+                      autoPlay 
+                      loop 
+                      muted 
+                      playsInline 
+                    />
+                    <div className="system-video-overlay">
+                      <div className="system-header">
+                        <h3>{system.title}</h3>
+                        <div className="system-tags">
+                          {system.tags.map((tag) => (
+                            <span className="system-tag" key={tag}>
+                              {tag}
+                            </span>
+                          ))}
+                        </div>
+                      </div>
+                      <p>{system.description}</p>
+                    </div>
+                  </div>
+                </article>
+              ))}
+            </div>
+            
+            <div className="carousel-controls">
+              <button
+                aria-label="Previous system"
+                className="carousel-button"
+                type="button"
+                onClick={() => setSystemCarouselIndex((prev) => prev - 1)}
+              >
+                &lt;
+              </button>
+              <button
+                aria-label="Next system"
+                className="carousel-button"
+                type="button"
+                onClick={() => setSystemCarouselIndex((prev) => prev + 1)}
+              >
+                &gt;
+              </button>
+            </div>
+
+            <div className="systems-indicators">
+              {systemProjects.map((_, index) => (
+                <div 
+                  key={index} 
+                  className={`system-indicator${index === activeSystemIndex ? ' is-active' : ''}`}
+                  onClick={() => setSystemCarouselIndex(index)}
+                />
+              ))}
+            </div>
           </div>
         </div>
       </section>
