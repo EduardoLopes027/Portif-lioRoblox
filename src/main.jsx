@@ -320,6 +320,12 @@ function App() {
   };
 
   useEffect(() => {
+    document.fonts.ready.then(() => {
+      document.body.classList.add('font-loaded');
+    });
+  }, []);
+
+  useEffect(() => {
     if ('scrollRestoration' in window.history) {
       window.history.scrollRestoration = 'manual';
     }

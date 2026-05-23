@@ -62,17 +62,24 @@ body {
 }
 
 h1 {
-  margin: 0;
+  margin: 0 auto;
   font-family: "Press Start 2P", monospace;
   font-weight: 400;
-  width: 10ch;
+  width: 0; /* Começa oculto para evitar o cálculo com a fonte errada */
   max-width: 100%;
+  box-sizing: content-box; /* Garante que 10ch seja apenas o texto, sem contar a borda */
   overflow: hidden;
-  font-size: clamp(2.25rem, 8.5vw, 6.25rem);
+  font-size: clamp(1.4rem, 7.5vw, 6.25rem);
   line-height: 1.25;
   color: #ffffff;
   white-space: nowrap;
-  border-right: 4px solid #ffffff;
+  border-right: 4px solid transparent; /* Invisível até carregar */
+  justify-self: center;
+}
+
+body.font-loaded h1 {
+  width: 10ch;
+  border-right-color: #ffffff;
   animation:
     typing 2s steps(10) forwards,
     blink 1s step-end infinite;
