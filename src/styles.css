@@ -65,13 +65,15 @@ h1 {
   margin: 0;
   font-family: "Press Start 2P", monospace;
   font-weight: 400;
-  width: 10ch;
+  width: max-content;
+  max-width: 100%;
   overflow: hidden;
   font-size: clamp(2.25rem, 8.5vw, 6.25rem);
   line-height: 1.25;
   color: #ffffff;
   white-space: nowrap;
   border-right: 0.08em solid #ffffff;
+  clip-path: inset(0 100% 0 0);
   animation:
     typing 1.8s steps(10, end) forwards,
     cursor-blink 0.8s step-end infinite;
@@ -643,11 +645,11 @@ h3 {
 
 @keyframes typing {
   from {
-    width: 0;
+    clip-path: inset(0 100% 0 0);
   }
 
   to {
-    width: 10ch;
+    clip-path: inset(0 0 0 0);
   }
 }
 
