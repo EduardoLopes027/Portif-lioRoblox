@@ -69,6 +69,11 @@ function useMomentumScroll() {
   const targetScrollRef = useRef(0);
   const animationRef = useRef(null);
   const touchYRef = useRef(0);
+  const [isMomentumScrollDisabled, setIsMomentumScrollDisabled] = useState(
+    () =>
+      window.matchMedia('(max-width: 640px)').matches ||
+      window.matchMedia('(prefers-reduced-motion: reduce)').matches,
+  );
 
   const clampScroll = useCallback((value) => {
     const maxScroll =
@@ -102,18 +107,47 @@ function useMomentumScroll() {
 
   const smoothScrollTo = useCallback(
     (top) => {
-      targetScrollRef.current = clampScroll(top);
+      const targetScroll = clampScroll(top);
+
+      if (isMomentumScrollDisabled) {
+        if (animationRef.current !== null) {
+          window.cancelAnimationFrame(animationRef.current);
+          animationRef.current = null;
+        }
+
+        currentScrollRef.current = targetScroll;
+        targetScrollRef.current = targetScroll;
+        window.scrollTo(0, targetScroll);
+        return;
+      }
+
+      targetScrollRef.current = targetScroll;
       startAnimation();
     },
-    [clampScroll, startAnimation],
+    [clampScroll, isMomentumScrollDisabled, startAnimation],
   );
 
   useEffect(() => {
-    const prefersReducedMotion = window.matchMedia(
+    const mobileViewport = window.matchMedia('(max-width: 640px)');
+    const reducedMotion = window.matchMedia(
       '(prefers-reduced-motion: reduce)',
-    ).matches;
+    );
+    const syncScrollPreference = () => {
+      setIsMomentumScrollDisabled(mobileViewport.matches || reducedMotion.matches);
+    };
 
-    if (prefersReducedMotion) {
+    syncScrollPreference();
+    mobileViewport.addEventListener('change', syncScrollPreference);
+    reducedMotion.addEventListener('change', syncScrollPreference);
+
+    return () => {
+      mobileViewport.removeEventListener('change', syncScrollPreference);
+      reducedMotion.removeEventListener('change', syncScrollPreference);
+    };
+  }, []);
+
+  useEffect(() => {
+    if (isMomentumScrollDisabled) {
       return undefined;
     }
 
@@ -199,7 +233,7 @@ function useMomentumScroll() {
         window.cancelAnimationFrame(animationRef.current);
       }
     };
-  }, [clampScroll, startAnimation]);
+  }, [clampScroll, isMomentumScrollDisabled, startAnimation]);
 
   return smoothScrollTo;
 }
