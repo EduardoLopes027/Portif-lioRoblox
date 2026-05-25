@@ -595,6 +595,41 @@ function App() {
           </div>
         </div>
       </section>
+
+      <footer className="footer-section">
+        <div className="footer-content">
+          <h2>Contact me</h2>
+          <div className="footer-links">
+            <a 
+              href="https://discord.com" 
+              target="_blank" 
+              rel="noreferrer" 
+              className="footer-link"
+            >
+              Discord
+            </a>
+            <a 
+              href="https://www.roblox.com" 
+              target="_blank" 
+              rel="noreferrer" 
+              className="footer-link"
+            >
+              Roblox
+            </a>
+            <a 
+              href="https://twitter.com" 
+              target="_blank" 
+              rel="noreferrer" 
+              className="footer-link"
+            >
+              Twitter / X
+            </a>
+          </div>
+          <div className="footer-bottom">
+            <p>© {new Date().getFullYear()} Vortex Dev. all rights reserved.</p>
+          </div>
+        </div>
+      </footer>
     </main>
   );
 }
