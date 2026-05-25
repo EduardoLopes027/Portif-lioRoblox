@@ -595,6 +595,16 @@ function App() {
           </div>
         </div>
       </section>
+
+      <section className="closing-section" aria-label="Let's work together">
+        <div className="closing-content">
+          <h2>Let's work together</h2>
+          <p>
+            Got an idea? I can help you design it simple, clean, and ready to
+            launch.
+          </p>
+        </div>
+      </section>
     </main>
   );
 }

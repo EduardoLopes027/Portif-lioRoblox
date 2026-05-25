@@ -312,6 +312,48 @@ h3 {
   background: #9eefff;
 }
 
+.closing-section {
+  position: relative;
+  z-index: 5;
+  min-height: 70vh;
+  display: grid;
+  place-items: center;
+  padding: 112px 32px;
+  text-align: center;
+  background: linear-gradient(
+    180deg,
+    #000000 0%,
+    #020814 20%,
+    #06132f 38%,
+    #0d2c68 58%,
+    #123f91 76%,
+    #4b9fda 91%,
+    #9eefff 100%
+  );
+  box-shadow: 0 -36px 70px rgba(0, 0, 0, 0.55);
+}
+
+.closing-content {
+  width: min(920px, 100%);
+}
+
+.closing-content h2 {
+  margin: 0 0 28px;
+  font-family: "Press Start 2P", monospace;
+  font-size: clamp(1.65rem, 5vw, 4rem);
+  font-weight: 400;
+  line-height: 1.35;
+  color: #ffffff;
+}
+
+.closing-content p {
+  max-width: 680px;
+  margin: 0 auto;
+  color: rgba(255, 255, 255, 0.78);
+  font-size: clamp(1rem, 1.7vw, 1.25rem);
+  line-height: 1.7;
+}
+
 .carousel-scene {
   --carousel-card-width: 260px;
   --carousel-radius: 200px;
@@ -730,6 +772,19 @@ h3 {
 @media (max-width: 640px) {
   .games-section {
     padding: 88px 24px;
+  }
+
+  .systems-section {
+    padding: 88px 24px;
+  }
+
+  .closing-section {
+    min-height: 60vh;
+    padding: 88px 24px;
+  }
+
+  .closing-content h2 {
+    margin-bottom: 24px;
   }
 
   .carousel-scene {
