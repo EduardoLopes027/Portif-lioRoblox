@@ -377,6 +377,26 @@ function App() {
     });
   }, [activeGameIndex]);
 
+  useEffect(() => {
+    const videos = systemsRef.current?.querySelectorAll('video');
+
+    if (!videos) {
+      return;
+    }
+
+    videos.forEach((video, index) => {
+      if (index === activeSystemIndex) {
+        video.play().catch(() => {
+          // Browsers can block autoplay until the user interacts with the page.
+        });
+        return;
+      }
+
+      video.pause();
+      video.currentTime = 0;
+    });
+  }, [activeSystemIndex]);
+
   return (
     <main className="page-stack">
       <section className="portfolio-shell" id="home">
@@ -541,10 +561,11 @@ function App() {
                   <div className="system-video-wrapper">
                     <video 
                       src={system.video} 
-                      autoPlay 
+                      autoPlay={index === activeSystemIndex}
                       loop 
                       muted 
-                      playsInline 
+                      playsInline
+                      preload={index === activeSystemIndex ? 'auto' : 'none'}
                     />
                     <div className="system-video-overlay">
                       <div className="system-header">

@@ -779,7 +779,76 @@ h3 {
   }
 
   .systems-section {
-    padding: 88px 24px;
+    min-height: auto;
+    padding: 72px 18px;
+  }
+
+  .systems-content .section-kicker {
+    margin-bottom: 14px;
+    font-size: 0.62rem;
+  }
+
+  .systems-content h2 {
+    margin-bottom: 28px;
+    font-size: clamp(1.15rem, 5.8vw, 1.35rem);
+    line-height: 1.45;
+  }
+
+  .systems-carousel-container {
+    max-width: 400px;
+  }
+
+  .system-video-wrapper {
+    aspect-ratio: 4 / 5;
+  }
+
+  .system-video-overlay {
+    padding: 72px 16px 18px;
+  }
+
+  .system-header {
+    flex-direction: column;
+    gap: 10px;
+    margin-bottom: 12px;
+  }
+
+  .system-video-overlay h3 {
+    font-size: 0.78rem;
+  }
+
+  .system-tags {
+    gap: 6px;
+  }
+
+  .system-tag {
+    padding: 4px 6px;
+    font-size: 0.48rem;
+  }
+
+  .system-video-overlay p {
+    max-width: 100%;
+    font-size: 0.8rem;
+    line-height: 1.55;
+  }
+
+  .systems-carousel-container .carousel-controls {
+    gap: 14px;
+    margin-top: 18px;
+  }
+
+  .systems-carousel-container .carousel-button {
+    width: 52px;
+    height: 46px;
+    font-size: 0.85rem;
+  }
+
+  .systems-indicators {
+    gap: 8px;
+    margin: 18px 16px 20px;
+  }
+
+  .system-indicator {
+    width: min(40px, calc((100% - 24px) / 4));
   }
 
   .closing-section {
